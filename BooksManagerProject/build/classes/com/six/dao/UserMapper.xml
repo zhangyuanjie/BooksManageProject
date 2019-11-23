@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.six.dao.UserMapper">
+	<select id = "checkUser" parameterType = "User" resultType = "user">
+		select * from t_user where name = #{name} and pwd = #{pwd}
+	</select>
+	
+	<select id="selectUserByName" resultType = "user">
+		select * from t_user where name = #{name}
+	</select>
+	
+	<insert id="insertUser" parameterType = "User">
+		insert into t_user(name, pwd, state, sex, time) values(#{name}, #{pwd}, #{state}, #{sex}, current_timestamp())
+	</insert>
+	
+	<select id="selectAllStudent" resultType="User">
+		select * from t_user where state = 0
+	</select>
+	
+	<select id="selectUserById" resultType = "user" parameterType="int">
+		select * from t_user where id = #{id}
+	</select>
+	
+	<delete id="deleteUserById" parameterType="int">
+		delete from t_user where id = #{id}
+	</delete>
+	
+	<select id="selectCount" resultType="Integer">
+		select count(*) from t_user where state=0
+	</select>
+	
+	<update id="updateUser" parameterType="User">
+		update t_user set pwd=#{pwd},state=#{state}
+		where name=#{name}
+	</update>
+</mapper>

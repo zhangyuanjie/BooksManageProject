@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>   
+
+	<!-- 设置别名 -->
+	<typeAliases>
+		<package name="com.six.entity"/>
+	</typeAliases>
+   
+    <!--2.配置Mapper的位置 -->
+    
+    <mappers>
+		<package name="com.six.dao"/>
+    </mappers>
+    
+    
+</configuration>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.six.dao.BooksMapper">
+
+	<select id="selectAllBooks" resultType="Books">
+		select * from t_books
+	</select>
+	
+	<select id="selectBooksByKey" parameterType="Books" resultType="books">
+		select * from t_books where 1=1
+			<if test="publisher!='' and publisher!=null">
+				and ((publisher like CONCAT('%',#{publisher},'%')))
+			</if>
+			<if test="name!='' and name!=null">
+				and ((name like CONCAT('%',#{name},'%')))
+			</if>
+			<if test="author!='' and author!=null">
+				and ((author like CONCAT('%',#{author},'%')))
+			</if>
+			<if test="family!='' and family!=null">
+				and family = #{family}
+			</if>
+	</select>
+	
+	<select id="selectBooksById" parameterType="Integer" resultType="books">
+		select * from t_books where id = #{id}
+	</select>
+	
+	<update id="borrowBook" parameterType="Integer">
+		update t_books set lend=0, id = #{id} where bid = #{bid}
+	</update>
+	
+	<update id="returnBook" parameterType="Integer">
+		update t_books set lend=1, id = 0 where bid = #{bid}
+	</update>
+	
+	<select id="selectBooksByName" parameterType="Books" resultType="books">
+		select * from t_books where ((name like CONCAT('%',#{name},'%')))
+	</select>
+	
+	<delete id="deleteBook" parameterType="Integer">
+		delete from t_books where bid = #{bid}
+	</delete>
+	
+</mapper>
